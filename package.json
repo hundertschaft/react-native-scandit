@@ -1,8 +1,13 @@
-
 {
   "name": "react-native-scandit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/salathegroup/react-native-scandit.git"
+  },
   "version": "1.0.0",
-  "description": "",
+  "description": "A Scandit picker component for React Native.",
+  "author": "Boris Conforty <boris@conforty.net>, Salathé Group, EPFL, Switzerland",
+  "nativePackage": true,
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +16,18 @@
     "react-native"
   ],
   "author": "",
-  "license": "",
+  "license": "MIT",
+  "homepage": "https://github.com/salathegroup/react-native-scandit.git",
+  "keywords": [
+    "scandit",
+    "react-native",
+    "react",
+    "native",
+    "camera",
+    "qr",
+    "code",
+    "barcode"
+  ],
   "peerDependencies": {
     "react-native": "^0.41.2"
   }
