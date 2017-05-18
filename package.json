@@ -12,10 +12,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "react-native"
-  ],
-  "author": "",
   "license": "MIT",
   "homepage": "https://github.com/salathegroup/react-native-scandit.git",
   "keywords": [
