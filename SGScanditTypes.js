@@ -11,19 +11,21 @@ export type ScanditSizeType = {
 }
 
 export type ScanditRectType = {
-  origin: ScanditPointType,
-  size: ScanditSizeType,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
 }
 
-export type ScanditQuadrilateralType = {
-
+export type ScanditScanAreaType = {
+  // TODO:
 }
 
-export type ScanditSymbologyType = 'EAN13' | 'UPC12' | 'UPCE' | 'Code39' | 'PDF417' | 'Datamatrix' | 'QR' | 'ITF' | 'Code128' | 'Code93' | 'MSIPlessey' | 'GS1Databar' | 'GS1DatabarExpanded' | 'Codabar' | 'EAN8' | 'Aztec' | 'TwoDigitAddOn' | 'FiveDigitAddOn' | 'Code11' | 'MaxiCode' | 'GS1DatabarLimited' | 'Code25' | 'MicroPDF417' | 'RM4SCC' | 'KIX';
+export type ScanditSymbologyType = 'EAN13' | 'UPC12' | 'UPCE' | 'Code39' | 'PDF417' | 'Datamatrix' | 'QR' | 'ITF' | 'Code128' | 'Code93' | 'MSIPlessey' | 'GS1Databar' | 'GS1DatabarExpanded' | 'Codabar' | 'EAN8' | 'Aztec' | 'TwoDigitAddOn' | 'FiveDigitAddOn' | 'Code11' | 'MaxiCode' | 'GS1DatabarLimited' | 'Code25' | 'MicroPDF417' | 'RM4SCC' | 'KIX'
 
 export type ScanditSettingsType = {
-  activeScanningAreaLandscape?: ScanditRectType;
-  activeScanningAreaPortrait?: ScanditRectType;
+  activeScanningAreaLandscape?: ScanditScanAreaType;
+  activeScanningAreaPortrait?: ScanditScanAreaType;
   cameraFacingPreference?: 'front' | 'back';
   codeCachingDuration?: number;
   codeDuplicateFilter?: number;

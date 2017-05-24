@@ -1,8 +1,14 @@
 /* @flow */
 
-import React, { PropTypes, Component } from 'react';
+/* eslint
+  no-underscore-dangle:
+    ["error", { "allow": ["_onDidScan", "_onSettingsDidChange", "_activity"] }]
+  no-console:
+    0
+*/
+
+import React, { PropTypes } from 'react';
 import {
-  findNodeHandle,
   NativeModules,
   Platform,
   requireNativeComponent,
@@ -11,16 +17,16 @@ import {
   Event,
 } from 'react-native';
 
-import NativeComponent from './SGNativeComponent'
+import NativeComponent from './SGNativeComponent';
 
 import type {
   ScanditPointType as PointType,
   ScanditSizeType as SizeType,
   ScanditRectType as RectType,
-  ScanditQuadrilateralType as QuadrilateralType,
+  ScanditScanAreaType as ScanAreaType,
   ScanditSymbologyType as SymbologyType,
   ScanditSettingsType as SettingsType,
-} from './SGScanditTypes'
+} from './SGScanditTypes';
 
 const { SGScandit, SGScanditPicker } = NativeModules;
 
@@ -34,43 +40,22 @@ type ScanditPickerPropsType = {
 
 }
 
+type ScanditPickerActivityType = 'active' | 'paused' | 'stopped';
+
 export class ScanditPicker extends NativeComponent {
   _onDidScan: Function;
   _onSettingsDidChange: Function;
-
-  _autoTimeouts: number[];
+  _activity: ScanditPickerActivityType;
 
   constructor(props: ScanditPickerPropsType) {
     super(props);
 
-    this._autoTimeouts = [];
     this._onDidScan = this._onDidScan.bind(this);
     this._onSettingsDidChange = this._onSettingsDidChange.bind(this);
-  }
-
-  _removeAutoTimeouts() {
-    this._autoTimeouts.forEach((timeout) => {
-      clearTimeout(timeout);
-    });
-    this._autoTimeouts = [];
-  }
-
-  _stopAndRestart() {
-    this.stopScanning();
-    const t1 = setTimeout(() => {
-      this.startScanningInPausedState();
-    }, 750);
-    const t2 = setTimeout(() => {
-      this.startScanning();
-    }, 1500);
-
-    this._autoTimeouts.push(t1);
-    this._autoTimeouts.push(t2);
+    this._activity = 'stopped';
   }
 
   _onDidScan(event: Event) {
-    this._stopAndRestart();
-
     if (this.props.onScan) {
       this.props.onScan(event.nativeEvent);
     }
@@ -80,6 +65,7 @@ export class ScanditPicker extends NativeComponent {
     if (!this.props.onSettingsChange) {
       return;
     }
+    console.log(JSON.stringify(event.nativeEvent, null, 2));
     this.props.onSettingsChange(event.nativeEvent);
   }
 
@@ -87,15 +73,16 @@ export class ScanditPicker extends NativeComponent {
     this.startScanning();
   }
 
-  getSettings() {
-    this.dispatchCommand(Commands.getSettings);
+  getSettings(): Promise<*> {
+    return this.dispatchCommand(Commands.getSettings);
   }
 
-  setSettings(settings: SettingsType) {
-    this.dispatchCommand(Commands.setSettings, [settings]);
+  setSettings(settings: SettingsType): Promise<*> {
+    return this.dispatchCommand(Commands.setSettings, [settings]);
   }
-  startScanning() {
-    this.dispatchCommand(Commands.startScanning);
+
+  startScanning(): Promise<*> {
+    return this.dispatchCommand(Commands.startScanning);
   }
 
   startScanningInPausedState() {
@@ -104,23 +91,26 @@ export class ScanditPicker extends NativeComponent {
 
   stopScanning() {
     this.dispatchCommand(Commands.stopScanning);
-    this._removeAutoTimeouts();
   }
 
   pauseScanning() {
     this.dispatchCommand(Commands.pauseScanning);
-    this._removeAutoTimeouts();
   }
 
   resumeScanning() {
     this.dispatchCommand(Commands.resumeScanning);
   }
 
+  activity(): string {
+    return this._activity;
+  }
+
   render() {
-    return <SGScanditPickerComponent {...this.props}
+    return (<SGScanditPickerComponent
+      {...this.props}
       onDidScan={this._onDidScan}
       onSettingsDidChange={this._onSettingsDidChange}
-    />;
+    />);
   }
 }
 
@@ -138,7 +128,7 @@ const SGScanditPickerComponent = requireNativeComponent(
     nativeOnly: {
       onDidScan: true,
       onSettingsDidChange: true,
-    }
+    },
   },
 );
 
@@ -147,6 +137,7 @@ export default SGScandit;
 export type ScanditPointType = PointType;
 export type ScanditSizeType = SizeType;
 export type ScanditRectType = RectType;
-export type ScanditQuadrilateralType = QuadrilateralType;
+export type ScanditScanAreaType = ScanAreaType;
 export type ScanditSymbologyType = SymbologyType;
 export type ScanditSettingsType = SettingsType;
+export const ScanditSDKVersion = SGScandit.SDK_VERSION;
