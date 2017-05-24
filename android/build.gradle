@@ -30,7 +30,7 @@ repositories {
     mavenCentral()
     repositories {
         flatDir{
-            dirs '/Users/BDC/Downloads/scandit-barcodescanner-community-android_5.3.0BETA1/ScanditSDK'
+            dirs '/Users/BDC/Downloads/scandit-barcodescanner-community-android_5.3.0BETA2/ScanditSDK'
         }
     }
 }

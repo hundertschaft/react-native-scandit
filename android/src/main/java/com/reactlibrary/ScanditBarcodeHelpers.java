@@ -6,15 +6,19 @@
 package com.reactlibrary;
 
 import android.graphics.Point;
+import android.graphics.PointF;
+import android.graphics.RectF;
 import android.util.Log;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.scandit.barcodepicker.ScanAreaSettings;
 import com.scandit.barcodepicker.ScanSettings;
 import com.scandit.base.util.JSONParseException;
 import com.scandit.recognition.Barcode;
+import com.scandit.recognition.BarcodeScannerSettings;
 import com.scandit.recognition.Quadrilateral;
 
 import org.json.JSONArray;
@@ -214,18 +218,105 @@ public class ScanditBarcodeHelpers {
         return "Unknown";
     }
 
+    static public WritableMap pointToWritableMap(PointF point) {
+        WritableMap map = Arguments.createMap();
+        map.putDouble("x", point.x);
+        map.putDouble("y", point.y);
+        return map;
+    }
+
+    static public WritableMap rectToWritableMap(RectF rect) {
+        WritableMap map = Arguments.createMap();
+        map.putDouble("x", rect.left);
+        map.putDouble("y", rect.top);
+        map.putDouble("width", rect.width());
+        map.putDouble("height", rect.height());
+        return map;
+    }
+
+    static public String locationContraintToString(int constraint) {
+        if (constraint == BarcodeScannerSettings.CODE_LOCATION_RESTRICT) {
+            return "restrict";
+        } else if (constraint == BarcodeScannerSettings.CODE_LOCATION_HINT) {
+            return "hint";
+        } else {
+            return "unknown";
+        }
+    }
+
+    static public WritableMap scanAreaToWritableMap(ScanAreaSettings settings) {
+        if (settings == null) return null;
+
+        WritableMap map = Arguments.createMap();
+        switch (settings.primaryDirection) {
+            case 1:
+                map.putString("primaryDirection", "vertical");
+                break;
+            case 2:
+                map.putString("primaryDirection", "horizontal");
+                break;
+            default:
+                map.putString("primaryDirection", "unknown");
+                break;
+        }
+        map.putMap("searchArea", rectToWritableMap(settings.searchArea));
+
+        map.putMap("squareCodeLocationArea", rectToWritableMap(settings.squareCodeLocationArea));
+        map.putString("squareCodeLocationConstraint", locationContraintToString(settings.squareCodeLocationConstraint));
+
+        map.putMap("wideCodeLocationArea", rectToWritableMap(settings.wideCodeLocationArea));
+        map.putString("wideCodeLocationConstraint", locationContraintToString(settings.wideCodeLocationConstraint));
+
+        return map;
+    }
+
     static public WritableMap scanSettingsToWritableMap(ScanSettings scanSettings) {
         WritableMap map;
         try {
             JSONObject json = scanSettings.toJSON();
 
             // Handle values that, strangely, are not put in json by Scandit framework
-            json.put("cameraFacingPreference", cameraFacingPreferenceToString(scanSettings.getCameraFacingPreference()));
-            json.put("recognitionMode", recognitionModeToString(scanSettings.getRecognitionMode()));
-            // ... more need to be added
+            if (!json.has("cameraFacingPreference")) {
+                json.put("cameraFacingPreference", cameraFacingPreferenceToString(scanSettings.getCameraFacingPreference()));
+            }
+            if (!json.has("recognitionMode")) {
+                json.put("recognitionMode", recognitionModeToString(scanSettings.getRecognitionMode()));
+            }
+            if (!json.has("codeCachingDuration")) {
+                json.put("codeCachingDuration", scanSettings.getCodeCachingDuration());
+            }
+            if (!json.has("codeDuplicateFilter")) {
+                json.put("codeDuplicateFilter", scanSettings.getCodeDuplicateFilter());
+            }
+            if (!json.has("codeRejectionEnabled")) {
+                json.put("codeRejectionEnabled", scanSettings.isCodeRejectionEnabled());
+            }
+            if (!json.has("highDensityModeEnabled")) {
+                json.put("highDensityModeEnabled", scanSettings.isHighDensityModeEnabled());
+            }
+            if (!json.has("matrixScanEnabled")) {
+                json.put("matrixScanEnabled", scanSettings.isMatrixScanEnabled());
+            }
+            if (!json.has("maxNumberOfCodesPerFrame")) {
+                json.put("maxNumberOfCodesPerFrame", scanSettings.getMaxNumberOfCodesPerFrame());
+            }
+            if (!json.has("relativeZoom")) {
+                json.put("relativeZoom", scanSettings.getRelativeZoom());
+            }
+            if (!json.has("scanningHotSpot")) {
+                json.put("scanningHotSpot", pointToWritableMap(scanSettings.getScanningHotSpot()));
+            }
+            if (!json.has("areaSettingsLandscape")) {
+                json.put("areaSettingsLandscape", scanAreaToWritableMap(scanSettings.getAreaSettingsLandscape()));
+            }
+            if (!json.has("areaSettingsPortrait")) {
+                json.put("areaSettingsPortrait", scanAreaToWritableMap(scanSettings.getAreaSettingsPortrait()));
+            }
 
             // Handle values that, strangely, are put as codes instead of strings
             json.put("workingRange", workingRangeToString(scanSettings.getWorkingRange()));
+
+            // TODO: textRecognition
 
             map = jsonObjectToWritableMap(json);
 

@@ -11,9 +11,11 @@ import android.util.Log;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
+import com.facebook.react.modules.core.RCTNativeAppEventEmitter;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.UIManagerModule;
@@ -43,6 +45,8 @@ public class SGScanditPicker extends SimpleViewManager<BarcodePicker> implements
     private static final int COMMAND_SET_SETTINGS   = 4;
     private static final int COMMAND_GET_SETTINGS   = 5;
 
+    public static final String COMMAND_DONE_EVENT_NAME = "COMMAND_DONE_EVENT_NAME";
+
     private static final Map<String, Integer> COMMAND_MAP = MapBuilder.of(
             "stopScanning" , COMMAND_STOP_SCANNING,
             "startScanning", COMMAND_START_SCANNING,
@@ -63,6 +67,7 @@ public class SGScanditPicker extends SimpleViewManager<BarcodePicker> implements
     private BarcodePicker picker;
     private ScanSettings scanSettings = ScanSettings.create();
     private EventDispatcher eventDispatcher;
+    private RCTNativeAppEventEmitter nativeAppEventEmitter;
 
     @Override
     public String getName() {
@@ -72,7 +77,9 @@ public class SGScanditPicker extends SimpleViewManager<BarcodePicker> implements
     @Override
     public BarcodePicker createViewInstance(ThemedReactContext context) {
         // Store event dispatcher for emission of events
-        this.eventDispatcher = context.getNativeModule(UIManagerModule.class).getEventDispatcher();
+        eventDispatcher = context.getNativeModule(UIManagerModule.class).getEventDispatcher();
+
+        nativeAppEventEmitter = context.getJSModule(RCTNativeAppEventEmitter.class);
 
         // BarcodePicker extends View
         picker = new BarcodePicker(context, scanSettings);
@@ -122,7 +129,7 @@ public class SGScanditPicker extends SimpleViewManager<BarcodePicker> implements
     private void emitSettings() {
         WritableMap event = ScanditBarcodeHelpers.scanSettingsToWritableMap(scanSettings);
 
-        this.eventDispatcher.dispatchEvent(new SettingsDidChangeEvent(picker.getId(), event));
+        eventDispatcher.dispatchEvent(new SettingsDidChangeEvent(picker.getId(), event));
         //this.deviceEventEmitterModule.emit(GET_SETTINGS_EVENT_NAME, event);
     }
 
@@ -131,14 +138,38 @@ public class SGScanditPicker extends SimpleViewManager<BarcodePicker> implements
     public void receiveCommand(
             BarcodePicker view,
             int commandType,
-            @Nullable ReadableArray args) {
+            @Nullable final ReadableArray args) {
+
+        int argCount = args == null ? 0 : args.size();
+        final WritableMap promiseResponse = Arguments.createMap();
+        if (argCount > 0) {
+            if (args.getType(args.size() - 1) == ReadableType.Map) {
+                ReadableMap map = args.getMap(args.size() - 1);
+                if (map.hasKey("commandid")) {
+                    int commandid = map.getInt("commandid");
+                    promiseResponse.putInt("commandid", commandid);
+                    argCount--;
+                }
+            }
+        }
+
         switch (commandType) {
             case COMMAND_STOP_SCANNING: {
                 picker.stopScanning();
                 return;
             }
             case COMMAND_START_SCANNING: {
-                picker.startScanning();
+                picker.startScanning(false, new Runnable() {
+                    @Override
+                    public void run() {
+                        new PromiseSender(promiseResponse) {
+                            @Override
+                            public Object getResponse() {
+                                return "Scan started";
+                            }
+                        };
+                    }
+                });
                 return;
             }
             case COMMAND_START_SCANNING_IN_PAUSED_STATE: {
@@ -150,13 +181,34 @@ public class SGScanditPicker extends SimpleViewManager<BarcodePicker> implements
                 return;
             }
             case COMMAND_SET_SETTINGS: {
-                if (args != null && args.size() > 0) {
+                if (argCount > 0) {
                     ReadableMap map = args.getMap(0);
                     setSettings(null, map);
+                    new PromiseSender(promiseResponse) {
+                        @Override
+                        public Object getResponse() {
+                            return ScanditBarcodeHelpers.scanSettingsToWritableMap(scanSettings);
+                        }
+                    };
+                } else {
+                    final int c = argCount;
+                    new PromiseSender(promiseResponse) {
+                        @Override
+                        public Object getResponse() {
+                            promiseFailed = true;
+                            return "Cannot set null settings" + c;
+                        }
+                    };
                 }
                 return;
             }
             case COMMAND_GET_SETTINGS: {
+                new PromiseSender(promiseResponse) {
+                    @Override
+                    public Object getResponse() {
+                        return ScanditBarcodeHelpers.scanSettingsToWritableMap(scanSettings);
+                    }
+                };
                 emitSettings();
                 return;
             }
@@ -194,7 +246,7 @@ public class SGScanditPicker extends SimpleViewManager<BarcodePicker> implements
         WritableMap event = Arguments.createMap();
         event.putArray(NEWLY_RECOGNIZED_CODES, newlyRecognizedCodes);
 
-        this.eventDispatcher.dispatchEvent(new DidScanEvent(picker.getId(), event));
+        eventDispatcher.dispatchEvent(new DidScanEvent(picker.getId(), event));
     }
 
     private class DidScanEvent extends NativeEvent<DidScanEvent> {
@@ -220,6 +272,41 @@ public class SGScanditPicker extends SimpleViewManager<BarcodePicker> implements
         @Override
         public String getEventName() {
             return EVENT_NAME;
+        }
+    }
+
+    private abstract class PromiseSender {
+
+        public final WritableMap promiseResponse;
+        public boolean promiseFailed = false;
+
+        public PromiseSender(WritableMap promiseResponse) {
+            this.promiseResponse = promiseResponse;
+            if (promiseResponse.hasKey("commandid")) {
+                addResponse();
+                nativeAppEventEmitter.emit(COMMAND_DONE_EVENT_NAME, promiseResponse);
+            }
+        }
+
+        public abstract Object getResponse();
+
+        private void addResponse() {
+            final String key = "result";
+            Object value = getResponse();
+
+            if (value instanceof Boolean)            promiseResponse.putBoolean(key, (Boolean)value);
+            else if (value instanceof String)        promiseResponse.putString (key, (String)value);
+            else if (value instanceof Double)        promiseResponse.putDouble (key, (Double)value);
+            else if (value instanceof Integer)       promiseResponse.putInt    (key, (Integer)value);
+            else if (value instanceof WritableMap)   promiseResponse.putMap    (key, (WritableMap) value);
+            else if (value instanceof WritableArray) promiseResponse.putArray  (key, (WritableArray) value);
+            else if (value == null)                  promiseResponse.putNull(key);
+
+            if (promiseFailed) {
+                promiseResponse.putString("type", "reject");
+            } else {
+                promiseResponse.putString("type", "resolve");
+            }
         }
     }
 

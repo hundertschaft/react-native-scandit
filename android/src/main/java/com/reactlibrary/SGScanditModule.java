@@ -25,7 +25,6 @@ public class SGScanditModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
 
-
     public SGScanditModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
@@ -42,6 +41,7 @@ public class SGScanditModule extends ReactContextBaseJavaModule {
         final Map<String, Object> constants = new HashMap<>();
 
         constants.put("SDK_VERSION", sc_get_framework_version());
+        constants.put("COMMAND_DONE_EVENT_NAME", SGScanditPicker.COMMAND_DONE_EVENT_NAME);
 
         return constants;
     }
