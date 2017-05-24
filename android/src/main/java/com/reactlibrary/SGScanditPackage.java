@@ -1,3 +1,7 @@
+/**
+ * Created by Boris Conforty on 13.04.17.
+ * Copyright © 2017 Salathé Group, EPFL. All rights reserved.
+ */
 
 package com.reactlibrary;
 
@@ -13,16 +17,20 @@ import com.facebook.react.bridge.JavaScriptModule;
 public class SGScanditPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-      return Arrays.<NativeModule>asList(new SGScanditModule(reactContext));
+        return Arrays.<NativeModule>asList(
+                new SGScanditModule(reactContext)
+        );
     }
 
     @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
-      return Collections.emptyList();
+        return Collections.emptyList();
     }
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-      return Collections.emptyList();
+        return Arrays.<ViewManager>asList(
+                new SGScanditPicker()
+        );
     }
 }
