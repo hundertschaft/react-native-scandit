@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		690DC6B31ED5727B00E796D7 /* ScanditBarcodeScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 690DC6B21ED5727B00E796D7 /* ScanditBarcodeScanner.framework */; };
 		698EA2F31ED322B00075121D /* SGScanditPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 698EA2F21ED322B00075121D /* SGScanditPicker.m */; };
 		698EA2F61ED333320075121D /* SGScanditPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 698EA2F51ED333320075121D /* SGScanditPickerView.m */; };
 		698EA2F91ED334AC0075121D /* SBSScanSettings+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 698EA2F81ED334AC0075121D /* SBSScanSettings+Helpers.m */; };
@@ -28,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libSGScandit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSGScandit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		698EA2EA1ED2E7920075121D /* ScanditBarcodeScanner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScanditBarcodeScanner.framework; path = "../../../../../../../Downloads/scandit-barcodescanner-community-ios_5.3.0BETA1/ScanditSDK/ScanditBarcodeScanner.framework"; sourceTree = "<group>"; };
+		690DC6B21ED5727B00E796D7 /* ScanditBarcodeScanner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScanditBarcodeScanner.framework; path = "../../../../../../../Downloads/scandit-barcodescanner-community-ios_5.3.0BETA2/ScanditSDK/ScanditBarcodeScanner.framework"; sourceTree = "<group>"; };
 		698EA2F11ED322B00075121D /* SGScanditPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGScanditPicker.h; sourceTree = "<group>"; };
 		698EA2F21ED322B00075121D /* SGScanditPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGScanditPicker.m; sourceTree = "<group>"; };
 		698EA2F41ED333320075121D /* SGScanditPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGScanditPickerView.h; sourceTree = "<group>"; };
@@ -46,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				690DC6B31ED5727B00E796D7 /* ScanditBarcodeScanner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +83,7 @@
 		698EA2E91ED2E7920075121D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				698EA2EA1ED2E7920075121D /* ScanditBarcodeScanner.framework */,
+				690DC6B21ED5727B00E796D7 /* ScanditBarcodeScanner.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,6 +175,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -214,6 +217,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -232,7 +236,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = "/Users/BDC/Downloads/scandit-barcodescanner-community-ios_5.2.0/ScanditSDK/**";
+				FRAMEWORK_SEARCH_PATHS = "/Users/BDC/Downloads/scandit-barcodescanner-community-ios_5.3.0BETA2/ScanditSDK";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -254,7 +258,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = "/Users/BDC/Downloads/scandit-barcodescanner-community-ios_5.2.0/ScanditSDK/**";
+				FRAMEWORK_SEARCH_PATHS = "/Users/BDC/Downloads/scandit-barcodescanner-community-ios_5.3.0BETA2/ScanditSDK";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,

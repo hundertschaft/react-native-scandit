@@ -12,7 +12,7 @@
 NSString *symbologyToString(SBSSymbology symbology)
 {
     NSString *string = nil;
-    // Use switch instead of a dictionary, for instance, to get
+    // Use switch without default instead of a dictionary, for instance, to get
     // compiler warning if we miss an item
     switch (symbology) {
         case SBSSymbologyEAN13:              string = @"EAN13"; break;
@@ -91,18 +91,16 @@ SBSSymbology stringToSymbology(NSString *string)
 
 static NSDictionary *NSDictionaryFromCGPoint(CGPoint point)
 {
-    return @{@"x": @(point.x), @"y": @(point.y)};
-}
-
-static NSDictionary *NSDictionaryFromCGSize(CGSize size)
-{
-    return @{@"width": @(size.width), @"height": @(size.height)};
+    return @{@"x": @(point.x),
+             @"y": @(point.y)};
 }
 
 static NSDictionary *NSDictionaryFromCGRect(CGRect rect)
 {
-    return @{@"origin": NSDictionaryFromCGPoint(rect.origin),
-             @"size": NSDictionaryFromCGSize(rect.size)};
+    return @{@"x": @(rect.origin.x),
+             @"y": @(rect.origin.y),
+             @"width": @(rect.size.width),
+             @"height": @(rect.size.height)};
 }
 
 #define BOOLTOSTR(val) (val ? @"true" : @"false")
@@ -196,8 +194,8 @@ static CGSize CGSizeFromNSDictionary(NSDictionary *dict)
 
 static CGRect CGRectFromNSDictionary(NSDictionary *dict)
 {
-    CGPoint origin = CGPointFromNSDictionary(dict[@"origin"]);
-    CGSize size = CGSizeFromNSDictionary(dict[@"size"]);
+    CGPoint origin = CGPointFromNSDictionary(dict);
+    CGSize size = CGSizeFromNSDictionary(dict);
     CGRect rect;
     rect.origin = origin;
     rect.size = size;

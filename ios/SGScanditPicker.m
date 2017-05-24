@@ -40,21 +40,34 @@ typedef void (^CallbackBlock)(void);
     }];
 }
 
-RCT_EXPORT_METHOD(startScanning:(nonnull NSNumber *)reactTag)
+RCT_EXPORT_METHOD(startScanning:(nonnull NSNumber *)reactTag
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-    [self callBlockIfViewIsMine:reactTag
-                          block:
-     ^{
-         [_view.picker startScanning];
-     }];
+    [self startScanningInPausedState:reactTag
+                              paused:NO
+                            resolver:resolve
+                            rejecter:reject];
 }
 
-RCT_EXPORT_METHOD(startScanningInPausedState:(nonnull NSNumber *)reactTag)
+RCT_EXPORT_METHOD(startScanningInPausedState:(nonnull NSNumber *)reactTag
+                  paused:(BOOL)paused
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 {
     [self callBlockIfViewIsMine:reactTag
                           block:
      ^{
-         [_view.picker startScanningInPausedState:YES];
+         [_view.picker startScanningInPausedState:paused
+                                completionHandler:^
+          {
+              if (_view.picker.isScanning) {
+                  resolve(@"Scan started");
+              } else {
+                  NSError *error = [NSError errorWithDomain:@"world" code:-1 userInfo:nil];
+                  reject(@"-1", @"Could not start scanning", error);
+              }
+          }];
      }];
 }
 
@@ -88,11 +101,14 @@ RCT_EXPORT_METHOD(resumeScanning:(nonnull NSNumber *)reactTag)
 
 RCT_EXPORT_VIEW_PROPERTY(settings, NSDictionary *)
 
-RCT_EXPORT_METHOD(getSettings:(nonnull NSNumber *)reactTag)
+RCT_EXPORT_METHOD(getSettings:(nonnull NSNumber *)reactTag
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 {
     [self callBlockIfViewIsMine:reactTag
                           block:
      ^{
+         resolve(_view.settings);
          if (_view.onSettingsDidChange) {
              _view.onSettingsDidChange(_view.settings);
          }
@@ -100,12 +116,20 @@ RCT_EXPORT_METHOD(getSettings:(nonnull NSNumber *)reactTag)
 }
 
 RCT_EXPORT_METHOD(setSettings:(nonnull NSNumber *)reactTag
-                  settings:(NSDictionary *)settings)
+                  settings:(NSDictionary *)settings
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
 {
     [self callBlockIfViewIsMine:reactTag
                           block:
      ^{
-         _view.settings = settings;
+         if (settings) {
+             _view.settings = settings;
+             resolve(_view.settings);
+         } else {
+             NSError *error = [NSError errorWithDomain:@"world" code:-1 userInfo:nil];
+             reject(@"-1", @"Cannot set null settings", error);
+         }
          /*
          [[NSNotificationCenter defaultCenter] postNotificationName:GET_SETTINGS_EVENT_NAME
                                                              object:self
