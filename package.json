@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/salathegroup/react-native-scandit.git"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Scandit picker component for React Native.",
   "author": "Boris Conforty <boris@conforty.net>, Salathé Group, EPFL, Switzerland",
   "nativePackage": true,
