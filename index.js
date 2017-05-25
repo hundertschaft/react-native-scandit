@@ -59,6 +59,12 @@ export class ScanditPicker extends NativeComponent {
     if (this.props.onScan) {
       this.props.onScan(event.nativeEvent);
     }
+    if (this.props.onCodeScan) {
+      const codes = event.nativeEvent.newlyRecognizedCodes;
+      if (codes && codes.length) {
+        this.props.onCodeScan(codes[0]);
+      }
+    }
   }
 
   _onSettingsDidChange(event: Event) {
@@ -117,6 +123,7 @@ export class ScanditPicker extends NativeComponent {
 ScanditPicker.propTypes = {
   settings: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   onScan: PropTypes.func,
+  onCodeScan: PropTypes.func,
   onSettingsChange: PropTypes.func,
   ...View.propTypes,
 };
