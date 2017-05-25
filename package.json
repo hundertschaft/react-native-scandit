@@ -25,6 +25,7 @@
     "barcode"
   ],
   "peerDependencies": {
+    "react": ">15.4.1",
     "react-native": ">0.41.2"
   }
 }
