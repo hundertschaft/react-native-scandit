@@ -71,7 +71,6 @@ export class ScanditPicker extends NativeComponent {
     if (!this.props.onSettingsChange) {
       return;
     }
-    console.log(JSON.stringify(event.nativeEvent, null, 2));
     this.props.onSettingsChange(event.nativeEvent);
   }
 

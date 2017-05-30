@@ -43,9 +43,6 @@
     _scanSettings = [SBSScanSettings settingsFromDictionary:newSettings];
     [_picker applyScanSettings:_scanSettings completionHandler:nil];
     
-    NSLog(@"RECEIVED SETTINGS: %@", settings);
-    NSLog(@"NEW SETTINGS: %@", [_scanSettings toDictionary]);
-    
     if (_onSettingsDidChange) {
         _onSettingsDidChange(self.settings);
     }
