@@ -91,3 +91,25 @@ export default class ex2 extends Component {
 
 AppRegistry.registerComponent('MyFirstScanditApp', () => >MyFirstScanditApp);
 ```
+
+## Available Settings
+```
+type ScanditSettingsType = {
+  activeScanningAreaLandscape?: ScanditScanAreaType;
+  activeScanningAreaPortrait?: ScanditScanAreaType;
+  cameraFacingPreference?: 'front' | 'back';
+  codeCachingDuration?: number;
+  codeDuplicateFilter?: number;
+  codeRejectionEnabled?: boolean;
+  enabledSymbologies?: ScanditSymbologyType[];
+  force2dRecognition?: boolean;
+  highDensityModeEnabled?: boolean;
+  matrixScanEnabled?: boolean;
+  maxNumberOfCodesPerFrame?: number;
+  motionCompensationEnabled?: boolean;
+  relativeZoom?: number;
+  restrictedAreaScanningEnabled?: boolean;
+  scanningHotSpot?: ScanditPointType;
+  workingRange?: 'standard' | 'long';
+}
+```
