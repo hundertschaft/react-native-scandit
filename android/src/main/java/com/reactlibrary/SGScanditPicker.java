@@ -322,4 +322,3 @@ public class SGScanditPicker extends SimpleViewManager<BarcodePicker> implements
     }
 
 }
-

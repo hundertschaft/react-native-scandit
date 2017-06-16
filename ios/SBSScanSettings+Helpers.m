@@ -55,7 +55,7 @@ NSString *symbologyToString(SBSSymbology symbology)
         case SBSSymbologyUnknown:            string = @"unknown"; break;
     }
     if (!string) string = @"unknown";
-    
+
     return string;
 }
 
@@ -97,7 +97,7 @@ SBSSymbology stringToSymbology(NSString *string)
         ADDSYMBOLOGY(SBSSymbologyRM4SCC);
         ADDSYMBOLOGY(SBSSymbologyKIX);
     });
-    
+
     return [reversedSymbols[[string lowercaseString]] integerValue];
 }
 
@@ -120,63 +120,63 @@ static NSDictionary *NSDictionaryFromCGRect(CGRect rect)
 - (NSDictionary *)toDictionary
 {
     NSMutableDictionary *dict = [NSMutableDictionary new];
-    
+
     NSString *string;
     NSMutableArray *array;
-    
+
     switch (self.workingRange) {
         case SBSWorkingRangeLong:     string = @"long"; break;
         case SBSWorkingRangeStandard: string = @"standard"; break;
         default:                      string = @"unknown";
     }
     dict[@"workingRange"] = string;
-    
+
     array = [NSMutableArray new];
     [self.enabledSymbologies enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, BOOL * _Nonnull stop) {
         [array addObject:symbologyToString(obj.integerValue)];
     }];
     dict[@"enabledSymbologies"] = array;
-    
+
     // Skipped settingsForSymbology
-    
+
     dict[@"force2dRecognition"] = BOOLTOSTR(self.force2dRecognition);
-    
+
     dict[@"maxNumberOfCodesPerFrame"] = @(self.maxNumberOfCodesPerFrame);
-    
+
     dict[@"codeDuplicateFilter"] = @(self.codeDuplicateFilter);
-    
+
     dict[@"codeCachingDuration"] = @(self.codeCachingDuration);
-    
+
     dict[@"relativeZoom"] = @(self.relativeZoom);
-    
+
     switch (self.cameraFacingPreference) {
         case SBSCameraFacingDirectionBack:  string = @"back"; break;
         case SBSCameraFacingDirectionFront: string = @"front"; break;
         default: string = @"unknown";
     }
     dict[@"cameraFacingPreference"] = string;
-    
+
     dict[@"deviceName"] = self.deviceName;
-    
+
     dict[@"highDensityModeEnabled"] = BOOLTOSTR(self.highDensityModeEnabled);
-    
+
     dict[@"activeScanningAreaLandscape"] = NSDictionaryFromCGRect(self.activeScanningAreaLandscape);
-    
+
     dict[@"activeScanningAreaPortrait"] = NSDictionaryFromCGRect(self.activeScanningAreaPortrait);
-    
+
     dict[@"restrictedAreaScanningEnabled"] = BOOLTOSTR(self.restrictedAreaScanningEnabled);
-    
+
     dict[@"scanningHotSpot"] = NSDictionaryFromCGPoint(self.scanningHotSpot);
-    
+
     dict[@"motionCompensationEnabled"] = BOOLTOSTR(self.motionCompensationEnabled);
-    
+
     dict[@"codeRejectionEnabled"] = BOOLTOSTR(self.codeRejectionEnabled);
-    
+
     // Skipped areaSettingsPortrait
     // Skipped areaSettingsLandscape
-    
+
     dict[@"matrixScanEnabled"] = BOOLTOSTR(self.matrixScanEnabled);
-    
+
     return dict;
 }
 
@@ -211,7 +211,7 @@ static CGRect CGRectFromNSDictionary(NSDictionary *dict)
     CGRect rect;
     rect.origin = origin;
     rect.size = size;
-    
+
     return rect;
 }
 
@@ -235,9 +235,9 @@ static CGRect CGRectFromNSDictionary(NSDictionary *dict)
      free(properties);
      */
     SBSScanSettings *settings = [SBSScanSettings defaultSettings];
-    
+
     NSString *string;
-    
+
     string = dict[@"workingRange"];
     if (string) {
         settings.workingRange = [
@@ -246,23 +246,23 @@ static CGRect CGRectFromNSDictionary(NSDictionary *dict)
                                    @"standard": @(SBSWorkingRangeStandard),
                                    }[string] integerValue];
     }
-    
+
     NSArray *symbologies = dict[@"enabledSymbologies"];
     if (symbologies) {
         for (int i = 0; i < symbologies.count; i++) {
             NSString *symbologyString = symbologies[i];
             SBSSymbology symbology = stringToSymbology(symbologyString);
-            
+
             if (symbology == SBSSymbologyUnknown) {
                 NSLog(@"UNRECOGNIZED SYMBOLOGY: %@", symbologyString);
                 continue;
             }
-            
+
             [settings setSymbology:symbology
                            enabled:YES];
         }
     }
-    
+
     // Skipped settingsForSymbology
 #define NSStringize_helper(x) #x
 #define NSStringize(x) @NSStringize_helper(x)
@@ -273,13 +273,13 @@ static CGRect CGRectFromNSDictionary(NSDictionary *dict)
 #define GETSTRINGPROP(name) if ((value = [dict objectForKey:NSStringize(name)])) settings.name = value
 #define GETRECTPROP(name) if ((value = [dict objectForKey:NSStringize(name)])) settings.name = CGRectFromNSDictionary(value)
 #define GETPOINTPROP(name) if ((value = [dict objectForKey:NSStringize(name)])) settings.name = CGPointFromNSDictionary(value)
-    
+
     GETBOOLPROP(force2dRecognition);
     GETINTPROP(maxNumberOfCodesPerFrame);
     GETINTPROP(codeDuplicateFilter);
     GETINTPROP(codeCachingDuration);
     GETFLOATPROP(relativeZoom);
-    
+
     string = dict[@"cameraFacingPreference"];
     if (string) {
         settings.cameraFacingPreference = [
@@ -288,7 +288,7 @@ static CGRect CGRectFromNSDictionary(NSDictionary *dict)
                                              @"front": @(SBSCameraFacingDirectionFront),
                                              }[string] integerValue];
     }
-    
+
     GETSTRINGPROP(deviceName);
     GETBOOLPROP(highDensityModeEnabled);
     GETRECTPROP(activeScanningAreaLandscape);
@@ -297,12 +297,12 @@ static CGRect CGRectFromNSDictionary(NSDictionary *dict)
     GETPOINTPROP(scanningHotSpot);
     GETBOOLPROP(motionCompensationEnabled);
     GETBOOLPROP(codeRejectionEnabled);
-    
+
     // Skipped areaSettingsPortrait
     // Skipped areaSettingsLandscape
-    
+
     GETBOOLPROP(matrixScanEnabled);
-    
+
     return settings;
 }
 

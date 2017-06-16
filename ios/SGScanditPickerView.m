@@ -46,14 +46,14 @@
 - (void)setSettings:(NSDictionary *)settings
 {
     NSMutableDictionary *newSettings = [_scanSettings toDictionary].mutableCopy;
-    
+
     for (NSString *key in settings.allKeys) {
         [newSettings setValue:settings[key] forKey:key];
     }
-    
+
     _scanSettings = [SBSScanSettings settingsFromDictionary:newSettings];
     [_picker applyScanSettings:_scanSettings completionHandler:nil];
-    
+
     if (_onSettingsDidChange) {
         _onSettingsDidChange(self.settings);
     }

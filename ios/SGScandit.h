@@ -23,4 +23,3 @@
 @interface SGScandit : NSObject <RCTBridgeModule>
 
 @end
-  
