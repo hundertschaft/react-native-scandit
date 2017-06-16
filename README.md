@@ -116,29 +116,37 @@ type ScanditSettingsType = {
 
 ## React Native Props:
 
-settings: Scandit picker settings (see above)
-onScan: on scan, called with the full object passed by Scandit's SDK
-onCodeScan: on scan, called with the last scanned barcode only
-onSettingsChange: obvious. Can be used to update the interface (i.e. a button that shows “Use front camera” / “Use back camera”)
+`settings`: Scandit picker settings (see above)
+
+`onScan`: on scan, called with the full object passed by Scandit's SDK
+
+`onCodeScan`: on scan, called with the last scanned barcode only
+
+`onSettingsChange`: obvious. Can be used to update the interface (i.e. a button that shows “Use front camera” / “Use back camera”)
 
 
 ## JS:
 
-getSettings(): Promise<*>
-setSettings(settings: SettingsType): Promise<*>
-startScanning(): Promise<*>
+`getSettings(): Promise<*>`
+
+`setSettings(settings: SettingsType): Promise<*>`
+
+`startScanning(): Promise<*>`
 
 These return a promise, that can resolve or reject. On Android, I had to resolve to a promise implementation on the JS side (see SGNativeComponent.js), since React Native doesn’t seem to handle it (did I miss something?).
 
 
-startScanningInPausedState()
-stopScanning()
-pauseScanning()
-resumeScanning()
+`startScanningInPausedState()`
+
+`stopScanning()`
+
+`pauseScanning()`
+
+`resumeScanning()`
 
 These don’t return a promise but could. As everything was quite experimental, I didn’t reach that point.
 
 
-activity(): string
+`activity()`: string
 
 Ideally, this should return the current state (‘active', ‘paused’, or ‘stopped’), but it doesn't (TODO kind of thing...).
