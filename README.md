@@ -149,4 +149,4 @@ These don’t return a promise but could. As everything was quite experimental, 
 
 `activity()`: string
 
-Ideally, this should return the current state (‘active', ‘paused’, or ‘stopped’), but it doesn't (TODO kind of thing...).
+Ideally, this should return the current state ('active', 'paused', or 'stopped'), but it doesn't (TODO kind of thing...).
