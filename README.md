@@ -43,14 +43,14 @@ Notes:
 
 #### iOS
 
-1. Download Scandit SDK for iOS and uncompress the archive.
+1. Download Scandit SDK for iOS (https://ssl.scandit.com/sdk, Scandit account required) and uncompress the archive.
 2. Add ScanditBarcodeScanner.framework to the iOS project in target build phase "Link Binary With Libraries".
 3. Add libiconv.tbd and libz.tbd there too (needed by Scandit framework).
 4. Add the path to the folder containing ScanditBarcodeScanner.framework in project's build settings (Search Paths / Framework Search Paths)
 
 #### Android
 
-1. Download Scandit SDK for Android and uncompress the archive.
+1. Download Scandit SDK for Android (https://ssl.scandit.com/sdk, Scandit account required) and uncompress the archive.
 2. Add the following to your project's app build.gradle (the file is in the ScanditSDK subfolder of the SDK):
   	```
   	repositories {
