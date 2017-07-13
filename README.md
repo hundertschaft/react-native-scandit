@@ -44,9 +44,15 @@ Notes:
 #### iOS
 
 1. Download Scandit SDK for iOS (https://ssl.scandit.com/sdk, Scandit account required) and uncompress the archive.
-2. Add ScanditBarcodeScanner.framework to the iOS project in target build phase "Link Binary With Libraries".
-3. Add libiconv.tbd and libz.tbd there too (needed by Scandit framework).
-4. Add the path to the folder containing ScanditBarcodeScanner.framework in project's build settings (Search Paths / Framework Search Paths)
+2. Copy the `ScanditSDK` folder to your `ios/` folder. Note: This project assumes your ios project is under `ios/` — if not, you need to change the relative Framework Header Search path in the SGScandit.xcodeproj manually.
+3. Continue with the [Scandit install documentation](http://docs.scandit.com/stable/ios/ios-integrate.html) (which is at the time as follows):
+  - Drag the `ScanditBarcodeScanner.framework` from your `ios/ScanditSDK` folder (Finder) *inside xcode*, into your projects `Frameworks/` group. (If you don't have a Frameworks Group, create one via right click -> Create Group. Name it "Frameworks").
+  - A Model Pops-Up asking how xcode should add this file. Check both "Copy Items when needed" & "Create Groups". Select your target (should be selected) & hit ok.
+  - Drag the `ScanditBarcodeScanner.bundle` from inside the frameworks package (ios/ScanditSDK/ScanditBarcodeScanner.framework/Resources/ScanditBarcodeScanner.bundle) into the Frameworks group as well.
+  - The result should look something like this:
+ ![AddedFrameworkAndBundle](http://docs.scandit.com/stable/ios/img/ios/GettingStarted/AddedFrameworkAndBundle.png)
+
+4. Scandit requires additional native libraries. At a minimum `libiconv.tbd` and `libz.tbd` (if it does not compile, check the scandit documentation for the others libraries/frameworks and add the ones you are missing). Add them by selecting your Project-Root in Xcode -> Select your Target and add them under `Linked Frameworks and Libraries` via the "+".
 
 #### Android
 
