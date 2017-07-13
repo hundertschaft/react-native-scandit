@@ -236,7 +236,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = "/Users/BDC/Downloads/scandit-barcodescanner-community-ios_5.3.0BETA2/ScanditSDK";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../ios/ScanditSDK";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -258,7 +258,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = "/Users/BDC/Downloads/scandit-barcodescanner-community-ios_5.3.0BETA2/ScanditSDK";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../ios/ScanditSDK";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
