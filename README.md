@@ -52,7 +52,7 @@ Notes:
   - The result should look something like this:
  ![AddedFrameworkAndBundle](http://docs.scandit.com/stable/ios/img/ios/GettingStarted/AddedFrameworkAndBundle.png)
 
-4. Scandit requires additional native libraries. At a minimum `libiconv.tbd` and `libz.tbd` (if it does not compile, check the scandit documentation for the others libraries/frameworks and add the ones you are missing). Add them by selecting your Project-Root in Xcode -> Select your Target and add them under `Linked Frameworks and Libraries` via the "+".
+4. Scandit requires additional native libraries. At a minimum `libiconv.tbd`, `libz.tbd` and `MediaPlayer.framework` (if it does not compile, check the scandit documentation for the others libraries/frameworks and add the ones you are missing). Add them by selecting your Project-Root in Xcode -> Select your Target and add them under `Linked Frameworks and Libraries` via the "+".
 
 #### Android
 
