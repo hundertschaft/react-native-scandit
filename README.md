@@ -53,19 +53,51 @@ Notes:
  ![AddedFrameworkAndBundle](http://docs.scandit.com/stable/ios/img/ios/GettingStarted/AddedFrameworkAndBundle.png)
 
 4. Scandit requires additional native libraries. At a minimum `libiconv.tbd`, `libz.tbd` and `MediaPlayer.framework` (if it does not compile, check the scandit documentation for the others libraries/frameworks and add the ones you are missing). Add them by selecting your Project-Root in Xcode -> Select your Target and add them under `Linked Frameworks and Libraries` via the "+".
+5. Scandit requires camera access. Make sure to add the "Privacy - Camera access" to your info.plist file in xcode (click "+" at the top and search for "Privacy - Camera..." via the auto complete. As a value, write a short description for what the camera will be used. For example "Camera is needed to scan barcode".
+6. Don't forget: You can not use the Camera in the simulator. So you need to **use a real device for testing** (!). 
 
 #### Android
 
-1. Download Scandit SDK for Android (https://ssl.scandit.com/sdk, Scandit account required) and uncompress the archive.
-2. Add the following to your project's app build.gradle (the file is in the ScanditSDK subfolder of the SDK):
-  	```
-  	repositories {
-  	    flatDir{
-  	        dirs '/PATH/TO/ScanditBarcodeScanner.aar'
-  	    }
-  	}
-  	```
-
+1. Download Scandit SDK for Android (https://ssl.scandit.com/sdk, Scandit account required) and uncompress the archive. The rest is in line with [scandit android setup documentation](http://docs.scandit.com/stable/android/android-integrate.html) by doing the following...
+2. Create a folder named `vendor` inside of `android/app/src/`.
+3. Place the ScanditSDK folder (the one containing the .aar file in its root) from the archive into `android/app/src/vendor/` so that the path to the ScanditSDK is `your-rn-project/android/app/src/vendor/ScanditSDK/ScanditBarcodeScanner.aar`.
+4. Add to the `android/build.gradle`file the flatdir path `$rootDir/app/src/vendor/ScanditSDK`. Do that inside of the `allprojects { repositories {` section, so the final result looks something like this:
+```java
+(..)
+allprojects {
+    repositories {
+        mavenLocal()
+        jcenter()
+        // SCANDIT INSERT ----->
+        flatDir {
+            dirs "$rootDir/app/src/vendor/ScanditSDK"
+        }
+        // <----- SCANDIT INSERT END
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url "$rootDir/../node_modules/react-native/android"
+        }
+    }
+}
+```
+5. Go into your `android/app/build.gradle` und add to the dependencies section (located at the end of the gradle file) the line `compile(name:'ScanditBarcodeScanner', ext:'aar')` **BEFORE** the "`compile project(':react-native-scandit')`", so that your dependencies look something like this:
+```java
+(..)
+dependencies {
+    // (..)
+    compile(name:'ScanditBarcodeScanner', ext:'aar') // <--- INSERT BEFORE react-native-scandit compile statement
+    compile project(':react-native-scandit')
+    // (..)
+    compile fileTree(dir: "libs", include: ["*.jar"])
+    compile "com.android.support:appcompat-v7:23.0.1"
+    compile "com.facebook.react:react-native:+"  // From node_modules
+}
+(..)
+```
+6. Scandit requires camera access. Make sure to add to your `AndroidManifest.xml` (under `android/app/src/main/`) the folliwng permission:
+```xml
+    <uses-permission android:name="android.permission.CAMERA"/>
+```
 
 ## Usage
 ```javascript
