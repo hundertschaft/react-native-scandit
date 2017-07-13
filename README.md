@@ -108,7 +108,7 @@ import Scandit, { ScanditPicker, ScanditSDKVersion } from 'react-native-scandit'
 
 Scandit.setAppKey('<YOUR SCANDIT APP KEY>');
 
-export default class ex2 extends Component {
+export default class MyFirstScanditApp extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -127,7 +127,7 @@ export default class ex2 extends Component {
   }
 }
 
-AppRegistry.registerComponent('MyFirstScanditApp', () => >MyFirstScanditApp);
+AppRegistry.registerComponent('NAME_OF_RN_PROJECT', () => MyFirstScanditApp);
 ```
 
 ## Available Settings
