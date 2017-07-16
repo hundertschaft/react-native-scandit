@@ -2,7 +2,7 @@
 
 # react-native-scandit
 
->We (Shoplink GmbH) are a premium scandit-partner and in the process of merging our internal react-native bridget into this repository for public access. This project was originally created [by @Boris-c](https://github.com/salathegroup/react-native-scandit) at the Digital Epidemiology Lab at EPFL, Switzerland (Salathe Group). 
+>We (Shoplink GmbH) are a premium scandit-partner and in the process of merging our internal react-native bridge into this repository for public access. This project was originally created [by @Boris-c](https://github.com/salathegroup/react-native-scandit) at the Digital Epidemiology Lab at EPFL, Switzerland (Salathe Group). 
 
 ## Installation
 
