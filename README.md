@@ -192,7 +192,8 @@ Please create issues if you encounter problems. In terms of contribution, Scandi
  - **Testing**: If you have an idea for automatic testing of the bridge (continues integration, E2E tests), let us know.
  - **UI Overlays**: Scandit is a barcode scanner. In most cases, you want to display additional information on top of it without covering interaction elements. We show animations and other information when interacting with barcodes. However, a best practice of overlaying views is still missing.
 
- #### Link Resources & Inspiration for Contribution
+#### Link Resources & Inspiration for Contribution
+
   - [Repo - Official Scandit Cordova Plugin](https://github.com/Scandit/barcodescanner-sdk-cordova)
   - [Article - Moving Cordova plugins to React-Native](https://medium.com/@psak.works/cordova-plugins-with-react-native-236183a4204b)
   - [Repo - Cordova Plugin Adapter for React Native](https://github.com/axemclion/react-native-cordova-plugin)
