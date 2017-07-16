@@ -2,18 +2,18 @@
   "name": "react-native-scandit",
   "repository": {
     "type": "git",
-    "url": "https://github.com/salathegroup/react-native-scandit.git"
+    "url": "https://github.com/shoplinksys/react-native-scandit.git"
   },
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A Scandit picker component for React Native.",
-  "author": "Boris Conforty <boris@conforty.net>, Salathé Group, EPFL, Switzerland",
+  "author": "Shoplink Systems <system@shop.link>, Shoplink GmbH, Berlin, Germany",
   "nativePackage": true,
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",
-  "homepage": "https://github.com/salathegroup/react-native-scandit.git",
+  "homepage": "https://github.com/shoplinksys/react-native-scandit.git",
   "keywords": [
     "scandit",
     "react-native",

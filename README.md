@@ -1,6 +1,8 @@
 
 # react-native-scandit
 
+Originally created by [@Boris-c at Salathegroup](https://github.com/salathegroup/react-native-scandit). We are a premium scandit-partner and merge our internal react-native bridget into this repository.
+
 ## Getting started
 
 `$ npm install react-native-scandit@https://github.com/salathegroup/react-native-scandit.git --save`
