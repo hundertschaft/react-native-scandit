@@ -1,22 +1,19 @@
 
 # react-native-scandit
 
-Originally created by [@Boris-c at Salathegroup](https://github.com/salathegroup/react-native-scandit). We are a premium scandit-partner and merge our internal react-native bridget into this repository.
+>We (Shoplink GmbH) are a premium scandit-partner and in the process of merging our internal react-native bridget into this repository for public access. This project was originally created [by @Boris-c](https://github.com/salathegroup/react-native-scandit) at the Digital Epidemiology Lab at EPFL, Switzerland (Salathe Group). 
 
-## Getting started
+## Installation
 
-`$ npm install react-native-scandit@https://github.com/salathegroup/react-native-scandit.git --save`
+`$ react-native install react-native-scandit`
 
-### Mostly automatic installation
+Note:
+- Scandit's SDK is required. See below how to add it to the iOS and Android projects.
+- You need to allow access to the camera, both for iOS and Android. Barcode scanning can not be tested in the iOS Simulator.
 
-`$ react-native link react-native-scandit`
+## Manual installation
 
-Notes:
-- Scandit's SDK is required. See below how add it to iOS and Android projects)
-- You might need to allow access to the camera, both for iOS and Android
-
-### Manual installation
-
+`$ yarn install react-native-scandit`
 
 #### iOS
 
@@ -40,9 +37,7 @@ Notes:
       compile project(':react-native-scandit')
   	```
 
-
-### Add Scandit SDK
-
+## Add Scandit SDK
 #### iOS
 
 1. Download Scandit SDK for iOS (https://ssl.scandit.com/sdk, Scandit account required) and uncompress the archive.
@@ -133,7 +128,7 @@ AppRegistry.registerComponent('NAME_OF_RN_PROJECT', () => MyFirstScanditApp);
 ```
 
 ## Available Settings
-```
+```js
 type ScanditSettingsType = {
   activeScanningAreaLandscape?: ScanditScanAreaType;
   activeScanningAreaPortrait?: ScanditScanAreaType;
@@ -153,6 +148,7 @@ type ScanditSettingsType = {
   workingRange?: 'standard' | 'long';
 }
 ```
+> Note: Due to traversal, boleans and numbers may have to be passed as strings. I.e. `true` = `"true"`.
 
 ## React Native Props:
 
@@ -173,7 +169,7 @@ type ScanditSettingsType = {
 
 `startScanning(): Promise<*>`
 
-These return a promise, that can resolve or reject. On Android, I had to resolve to a promise implementation on the JS side (see SGNativeComponent.js), since React Native doesn’t seem to handle it (did I miss something?).
+>These return a promise, that can resolve or reject. On Android, I had to resolve to a promise implementation on the JS side (see SGNativeComponent.js), since React Native doesn’t seem to handle it (did I miss something?).
 
 
 `startScanningInPausedState()`
@@ -184,9 +180,21 @@ These return a promise, that can resolve or reject. On Android, I had to resolve
 
 `resumeScanning()`
 
-These don’t return a promise but could. As everything was quite experimental, I didn’t reach that point.
-
+>These don’t return a promise but could. As everything was quite experimental, I didn’t reach that point.
 
 `activity()`: string
 
-Ideally, this should return the current state ('active', 'paused', or 'stopped'), but it doesn't (TODO kind of thing...).
+>Ideally, this should return the current state ('active', 'paused', or 'stopped'), but it doesn't (TODO kind of thing...).
+
+## Contribution
+Please create issues if you encounter problems. In terms of contribution, Scandit maintains an [official cordova plugin](https://github.com/Scandit/barcodescanner-sdk-cordova). It is technically possible to migrate cordova plugins to react-native (see links below).
+ - **Cordova Parity**: If you have some ideas how to do so, or see missing (promise based) implementations, feel free to reach out or issue pull requests.
+ - **Testing**: If you have an idea for automatic testing of the bridge (continues integration, E2E tests), let us know.
+ - **UI Overlays**: Scandit is a barcode scanner. In most cases, you want to display additional information on top of it without covering interaction elements. We show animations and other information when interacting with barcodes. However, a best practice of overlaying views is still missing.
+
+ #### Link Resources & Inspiration for Contribution
+  - [Repo - Official Scandit Cordova Plugin](https://github.com/Scandit/barcodescanner-sdk-cordova)
+  - [Article - Moving Cordova plugins to React-Native](https://medium.com/@psak.works/cordova-plugins-with-react-native-236183a4204b)
+  - [Repo - Cordova Plugin Adapter for React Native](https://github.com/axemclion/react-native-cordova-plugin)
+  - [Repo - A cordova plugin bridge for react-native](https://github.com/remobile/react-native-cordova)
+  - [Article - Using Cordova plugins in ReactNative](http://blog.nparashuram.com/2016/04/using-cordova-plugins-in-reactnative.html)
