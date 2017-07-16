@@ -1,3 +1,4 @@
+[![NPM](https://nodei.co/npm/react-native-scandit.png?compact=true)](https://npmjs.org/package/react-native-scandit)
 
 # react-native-scandit
 
