@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/shoplinksys/react-native-scandit.git"
   },
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Scandit picker component for React Native.",
   "author": "Shoplink Systems <system@shop.link>, Shoplink GmbH, Berlin, Germany",
   "nativePackage": true,
