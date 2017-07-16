@@ -4,6 +4,22 @@
 
 >We (Shoplink GmbH) are a premium scandit-partner and in the process of merging our internal react-native bridge into this repository for public access. This project was originally created [by @Boris-c](https://github.com/salathegroup/react-native-scandit) at the Digital Epidemiology Lab at EPFL, Switzerland (Salathe Group). 
 
+## Run the iOS & Android Demo App
+
+ - If you don't have an account, [register on Scandit](https://ssl.scandit.com/customers/new?p=test) for a 30 day trail.
+ - Download the Scandit iOS and Android BarcodeScan SDK
+ - Clone this Repository
+ - Go into `_demo_/`
+ - run `yarn install` (or `npm install` if you only use npm)
+ - Set your API Key inside of `SCANDIT_KEY.js`
+ - **Android**
+   - Copy the `ScanditSDK` folder (containing the .aar file in its root) into `android/app/src/vendor/`
+   - Start the App in the emulator or device via `react-native run-android` (emulator: you need to set a webcam as a camera in your emulator to test barcode scanning)
+ - **iOS**
+   - Copy the `ScanditSDK` folder (containing the .framework file in its root) into `ios/`
+   - Open the `scandit.xcodeproj` with xcode and set your developer account for the targets `scandit` & `scanditTests`
+   - Connect your iOS device and run the build from xcode (simulator has no camera)
+
 ## Installation
 
 `$ react-native install react-native-scandit`
@@ -12,7 +28,7 @@ Note:
 - Scandit's SDK is required. See below how to add it to the iOS and Android projects.
 - You need to allow access to the camera, both for iOS and Android. Barcode scanning can not be tested in the iOS Simulator.
 
-## Manual installation
+## Manual Package installation
 
 `$ yarn install react-native-scandit`
 
