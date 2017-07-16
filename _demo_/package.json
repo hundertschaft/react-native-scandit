@@ -1,6 +1,8 @@
 {
 	"name": "scandit",
-	"version": "0.0.1",
+	"version": "1.1.3",
+	"description": "Scandit React-Native Demo for iOS and Android (using react-native-scandit).",
+	"author": "Shoplink GmbH <system@shop.link> (http://shop.link)",
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
@@ -19,5 +21,7 @@
 	},
 	"jest": {
 		"preset": "react-native"
-	}
+	},
+	"license": "MIT",
+	"homepage": "https://github.com/shoplinksys/react-native-scandit.git"
 }
