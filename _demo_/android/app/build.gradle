@@ -133,6 +133,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-config')
     compile(name:'ScanditBarcodeScanner', ext:'aar')
     compile project(':react-native-scandit')
     compile fileTree(dir: "libs", include: ["*.jar"])

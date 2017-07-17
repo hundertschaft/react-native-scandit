@@ -10,8 +10,8 @@
  - Download the Scandit iOS and Android BarcodeScan SDK
  - Clone this Repository
  - Go into `_demo_/`
+ - Set your API Key inside of the `.env` file
  - run `yarn install` (or `npm install` if you only use npm)
- - Set your API Key inside of `SCANDIT_KEY.js`
  - **Android**
    - Copy the `ScanditSDK` folder (containing the .aar file in its root) into `android/app/src/vendor/`
    - Start the App in the emulator or device via `react-native run-android` (emulator: you need to set a webcam as a camera in your emulator to test barcode scanning)
