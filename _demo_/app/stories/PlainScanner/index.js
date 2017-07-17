@@ -4,16 +4,16 @@ import { AppRegistry, StyleSheet, View, Text } from 'react-native';
 import Scandit, { ScanditPicker, ScanditSDKVersion } from 'react-native-scandit';
 
 // =============================================================================
-// Set your Scandit SDK App Key inside of .env
+// Set your Scandit SDK App Key inside of SCANDIT_KEY.js
 // =============================================================================
-import Config from 'react-native-config';
+import SCANDIT_KEY from "scandit/SCANDIT_KEY.js";
 
 /* CHECK FOR KEY */
-if (Config.SCANDIT_KEY === "<YOUR SCANDIT APP KEY>") {
+if (SCANDIT_KEY === "<YOUR SCANDIT APP KEY>") {
   console.warn("[MISSING KEY]: Set your Scandit App Key inside of SCANDIT_KEY.js before running this demo!")
 }
 
-Scandit.setAppKey(Config.SCANDIT_KEY);
+Scandit.setAppKey(SCANDIT_KEY);
 
 export default class App extends Component {
   render() {
@@ -34,5 +34,3 @@ export default class App extends Component {
     );
   }
 }
-
-AppRegistry.registerComponent('scandit', () => App);
