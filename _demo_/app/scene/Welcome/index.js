@@ -1,9 +1,11 @@
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
 
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { View, Text, Linking } from 'react-native';
 
-export default class Welcome extends React.Component {
+import centerView from "@container/centerView";
+
+export default class Welcome extends Component {
   styles = {
     wrapper: {
       flex: 1,
@@ -50,7 +52,7 @@ export default class Welcome extends React.Component {
             by Shoplink (<Text style={{
             color: 'blue'
           }} onPress={() => Linking.openURL('https://shop.link/')}>
-            shop.link</Text>). We are hiring!
+            shop.link</Text>). PS: We are hiring!
         </Text>
       </View>
     );

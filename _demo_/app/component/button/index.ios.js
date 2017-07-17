@@ -1,22 +1,22 @@
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
 
 import React, { PropTypes } from 'react';
-import { TouchableNativeFeedback } from 'react-native';
+import { TouchableHighlight } from 'react-native';
 
-export default function Button(props) {
+export default function button(props) {
   return (
-    <TouchableNativeFeedback onPress={props.onPress}>
+    <TouchableHighlight onPress={props.onPress}>
       {props.children}
-    </TouchableNativeFeedback>
+    </TouchableHighlight>
   );
 }
 
-Button.defaultProps = {
+button.defaultProps = {
   children: null,
-  onPress: () => {},
+  onPress: () => { },
 };
 
-Button.propTypes = {
+button.propTypes = {
   children: PropTypes.node,
   onPress: PropTypes.func,
 };
