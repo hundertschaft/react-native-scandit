@@ -10,7 +10,7 @@ import { linkTo } from '@storybook/addon-links';
 import Button from './Button';
 import CenterView from './CenterView';
 import Welcome from './Welcome';
-import PlainScanner from './PlainScanner';
+import Scanner from './Scanner';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -31,4 +31,4 @@ storiesOf('Button', module)
     </Button>
   );
 
-storiesOf('PlainScanner', module).add('plain', () => <PlainScanner />);
+storiesOf('Scanner', module).add('plain', () => <Scanner />);

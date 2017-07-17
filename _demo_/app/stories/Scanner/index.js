@@ -15,7 +15,11 @@ if (SCANDIT_KEY === "<YOUR SCANDIT APP KEY>") {
 
 Scandit.setAppKey(SCANDIT_KEY);
 
-export default class App extends Component {
+// =============================================================================
+// Scanner Component
+// =============================================================================
+
+export default class Scanner extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
