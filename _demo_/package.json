@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "storybook": "storybook start -p 7007"
+    "storybook": "storybook start -p 7007",
+    "clear-repo": "git clean -fdx -e _demo_/.vscode -e _demo_/ios/ScanditSDK/ -e _demo_/android/app/src/vendor/ScanditSDK/"
   },
   "dependencies": {
     "react": "16.0.0-alpha.12",
