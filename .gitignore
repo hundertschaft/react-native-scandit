@@ -9,7 +9,6 @@ node_modules/
 npm-debug.log
 yarn-error.log
   
-
 # Xcode
 #
 build/
@@ -43,9 +42,3 @@ local.properties
 buck-out/
 \.buckd/
 *.keystore
-
-# Scandit SDK
-lib/scandit-barcodescanner-community-android/*
-!lib/scandit-barcodescanner-community-android/README.txt
-lib/scandit-barcodescanner-community-ios/*
-!lib/scandit-barcodescanner-community-ios/README.txt
