@@ -8,6 +8,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "storybook": "storybook start -p 7007",
+    "storybook-setup-android-device": "adb devices && adb reverse tcp:8081 tcp:8081 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:7007 tcp:7007",
     "clear-repo": "git clean -fdx -e _demo_/.vscode -e _demo_/ios/ScanditSDK/ -e _demo_/android/app/src/vendor/ScanditSDK/"
   },
   "dependencies": {
