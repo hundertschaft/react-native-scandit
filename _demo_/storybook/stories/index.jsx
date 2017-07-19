@@ -7,8 +7,8 @@ import { storiesOf } from '@storybook/react-native';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
-import button from '@component/button';
-import centerView from '@container/centerView';
+import Button from '@component/Button';
+import CenterView from '@container/CenterView';
 import Welcome from '@scene/Welcome';
 import Scanner from '@container/Scanner';
 
@@ -16,19 +16,19 @@ storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo(
 
 storiesOf('Button', module)
   .addDecorator(getStory =>
-    <centerView>
+    <CenterView>
       {getStory()}
-    </centerView>
+    </CenterView>
   )
   .add('with text', () =>
-    <button onPress={action('clicked-text')}>
+    <Button onPress={action('clicked-text')}>
       <Text>Hello Button Test</Text>
-    </button>
+    </Button>
   )
   .add('with some emoji', () =>
-    <button onPress={action('clicked-emoji')}>
+    <Button onPress={action('clicked-emoji')}>
       <Text>😀 😎 👍 💯</Text>
-    </button>
+    </Button>
   );
 
 storiesOf('Scanner', module).add('plain', () => <Scanner />);

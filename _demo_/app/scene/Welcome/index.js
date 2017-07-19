@@ -3,8 +3,6 @@
 import React, { PropTypes, Component } from 'react';
 import { View, Text, Linking } from 'react-native';
 
-import centerView from "@container/centerView";
-
 export default class Welcome extends Component {
   styles = {
     wrapper: {
