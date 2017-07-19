@@ -1,4 +1,5 @@
 {
   "react-native-storybooks.port": 7007,
-  "react-native-storybooks.storyRegex": "app/stories/**/*.*"
+  "react-native-storybooks.storyRegex": "app/stories/**/*.*",
+  "extractcomponent.path": "/app/component/"
 }

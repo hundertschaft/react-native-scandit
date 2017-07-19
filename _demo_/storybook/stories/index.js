@@ -7,10 +7,10 @@ import { storiesOf } from '@storybook/react-native';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
-import Button from '@component/Button';
-import CenterView from '@container/CenterView';
-import Welcome from '@scene/Welcome';
-import Scanner from '@container/Scanner';
+import Button from '@component/button';
+import CenterView from '@container/centerView';
+import Welcome from '@scene/welcome';
+import Scanner from '@container/scanner';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
