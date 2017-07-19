@@ -23,7 +23,7 @@
     0
 */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import {
   NativeModules,
   Platform,
@@ -32,6 +32,7 @@ import {
   View,
   Event,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 import NativeComponent from './SGNativeComponent';
 
