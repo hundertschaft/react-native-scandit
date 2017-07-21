@@ -1,3 +1,5 @@
+This is a working branch to integrate storybook. Only ready up on merge.
+
 [![NPM](https://nodei.co/npm/react-native-scandit.png?compact=true)](https://npmjs.org/package/react-native-scandit)
 
 # react-native-scandit
