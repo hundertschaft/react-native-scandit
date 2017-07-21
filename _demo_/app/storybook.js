@@ -5,7 +5,9 @@ import { getStorybookUI, configure } from '@storybook/react-native';
 
 // import stories
 configure(() => {
-  require('./stories');
+  require('./component/button/story');
+  require('./container/scanner/story');
+  require('./scene/welcome/story');
 }, module);
 
 const StorybookUI = getStorybookUI({ port: 7007, host: 'localhost' });
