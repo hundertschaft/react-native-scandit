@@ -5,15 +5,17 @@
   "author": "Shoplink GmbH <system@shop.link> (http://shop.link)",
   "private": true,
   "scripts": {
-    "update-temp": "rm -rf node_modules/react-native-scandit && mkdir -p node_modules/react-native-scandit && cp -a -f -X __npm-module__/. node_modules/react-native-scandit/",
-    "update-local": "rm -rf __npm-module__ && mkdir -p __npm-module__ && cp -a -f -X node_modules/react-native-scandit/. __npm-module__/",
+    "postinstall": "npm run create-symlink",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "storybook": "storybook start -p 7007",
     "storybook-setup-android-device": "adb devices && adb reverse tcp:8081 tcp:8081 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:7007 tcp:7007",
     "clear-repo": "git clean -fdx -e .vscode -e .history -e ios/ScanditSDK/ -e android/app/src/vendor/ScanditSDK/",
     "git-untrack-scandit-key": "git update-index --skip-worktree SCANDIT_KEY.js",
-    "git-track-scandit-key": "git update-index --no-skip-worktree SCANDIT_KEY.js"
+    "git-track-scandit-key": "git update-index --no-skip-worktree SCANDIT_KEY.js",
+    "create-symlink": "ln -s ./node_modules/react-native-scandit ./__rns-npm-symlink__",
+    "update-temp": "rm -rf node_modules/react-native-scandit && mkdir -p node_modules/react-native-scandit && cp -a -f -X __npm-module__/. node_modules/react-native-scandit/",
+    "update-local": "rm -rf __npm-module__ && mkdir -p __npm-module__ && cp -a -f -X node_modules/react-native-scandit/. __npm-module__/"
   },
   "dependencies": {
     "react": "16.0.0-alpha.12",

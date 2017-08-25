@@ -5,6 +5,7 @@
 # DEMO SPECIFIC
 ios/ScanditSDK/*
 android/app/src/vendor/ScanditSDK/*
+__rns-npm-symlink__
 
 # Xcode
 #
