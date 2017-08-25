@@ -1,35 +1,38 @@
 {
-  "name": "react-native-scandit",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/shoplinksys/react-native-scandit.git"
-  },
+  "name": "scandit",
   "version": "1.1.5",
-  "description": "A Scandit picker component for React Native.",
+  "description": "Scandit React-Native Demo for iOS and Android (using react-native-scandit).",
   "author": "Shoplink GmbH <system@shop.link> (http://shop.link)",
-  "contributors": [
-    "Boris Conforty <boris@conforty.net>, Salathé Group, EPFL, Switzerland"
-  ],
-  "nativePackage": true,
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "increment-version": "cd _demo_ && npm --no-git-tag-version version patch && cd .. && git stage _demo_/package.json && git commit -m '🔖 Version Bump' && npm version patch"
+    "update-temp": "rm -rf node_modules/react-native-scandit && mkdir -p node_modules/react-native-scandit && cp -a -f -X __npm-module__/. node_modules/react-native-scandit/",
+    "update-local": "rm -rf __npm-module__ && mkdir -p __npm-module__ && cp -a -f -X node_modules/react-native-scandit/. __npm-module__/",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "storybook": "storybook start -p 7007",
+    "storybook-setup-android-device": "adb devices && adb reverse tcp:8081 tcp:8081 && adb reverse tcp:9001 tcp:9001 && adb reverse tcp:7007 tcp:7007",
+    "clear-repo": "git clean -fdx -e .vscode -e .history -e ios/ScanditSDK/ -e android/app/src/vendor/ScanditSDK/",
+    "git-untrack-scandit-key": "git update-index --skip-worktree SCANDIT_KEY.js",
+    "git-track-scandit-key": "git update-index --no-skip-worktree SCANDIT_KEY.js"
+  },
+  "dependencies": {
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.46.4",
+    "react-native-scandit": "^1.1.5",
+    "styled-components": "^2.1.1"
+  },
+  "devDependencies": {
+    "@storybook/react-native": "^3.1.9",
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "2.1.0",
+    "jest": "20.0.4",
+    "prop-types": "^15.5.10",
+    "react-dom": "16.0.0-alpha.12",
+    "react-test-renderer": "16.0.0-alpha.12"
+  },
+  "jest": {
+    "preset": "react-native"
   },
   "license": "MIT",
-  "homepage": "https://github.com/shoplinksys/react-native-scandit.git",
-  "keywords": [
-    "scandit",
-    "react-native",
-    "react",
-    "native",
-    "camera",
-    "qr",
-    "code",
-    "barcode"
-  ],
-  "peerDependencies": {
-    "react": ">15.4.1",
-    "react-native": ">0.41.2"
-  }
+  "homepage": "https://github.com/shoplinksys/react-native-scandit.git"
 }
