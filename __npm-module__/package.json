@@ -14,7 +14,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "increment-version": "cd _demo_ && npm --no-git-tag-version version patch && cd .. && git stage _demo_/package.json && git commit -m '🔖 Version Bump' && npm version patch"
+    "prepublish": "cd .. && npm --no-git-tag-version version patch && git stage package.json && cd __npm-module__ && git commit -m '🔖 Version Bump' && npm version patch"
   },
   "license": "MIT",
   "homepage": "https://github.com/shoplinksys/react-native-scandit.git",
