@@ -1,5 +1,3 @@
-This is a working branch to integrate storybook. Only ready up on merge.
-
 [![NPM](https://nodei.co/npm/react-native-scandit.png?compact=true)](https://npmjs.org/package/react-native-scandit)
 
 # react-native-scandit
@@ -11,8 +9,7 @@ This is a working branch to integrate storybook. Only ready up on merge.
  - If you don't have an account, [register on Scandit](https://ssl.scandit.com/customers/new?p=test) for a 30 day trail.
  - Download the Scandit iOS and Android BarcodeScan SDK
  - Clone this Repository
- - Go into `_demo_/`
- - Set your API Key inside of the `.env` file
+ - Set your API Key inside of the `SCANDIT_KEY.js` file
  - run `yarn install` (or `npm install` if you only use npm)
  - **Android**
    - Copy the `ScanditSDK` folder (containing the .aar file in its root) into `android/app/src/vendor/`
@@ -21,6 +18,8 @@ This is a working branch to integrate storybook. Only ready up on merge.
    - Copy the `ScanditSDK` folder (containing the .framework file in its root) into `ios/`
    - Open the `scandit.xcodeproj` with xcode and set your developer account for the targets `scandit` & `scanditTests`
    - Connect your iOS device and run the build from xcode (simulator has no camera)
+ - **Use Storybook**
+   - This demo implements [storybook for react native](https://github.com/storybooks/storybook/tree/master/app/react-native). You can run the storybook via `npm run storybook`. Don't forget to set your local IP of your computer inside of `storybook.js` for on device testing. Default: localhost.
 
 ## Installation
 
@@ -29,8 +28,9 @@ This is a working branch to integrate storybook. Only ready up on merge.
 Note:
 - Scandit's SDK is required. See below how to add it to the iOS and Android projects.
 - You need to allow access to the camera, both for iOS and Android. Barcode scanning can not be tested in the iOS Simulator.
+- The npm package is found in this repo under `__npm-module__/` to avoid sym linking solutions for development.
 
-## Manual Package installation
+## Manual Package installation for iOS and Android
 
 `$ yarn install react-native-scandit`
 
