@@ -5570,9 +5570,9 @@ react-native-compat@^1.0.0:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-scandit@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/react-native-scandit/-/react-native-scandit-1.1.5.tgz#412f00b9405194bad3a0bd166a9c3a45229a1bbd"
+react-native-scandit@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/react-native-scandit/-/react-native-scandit-1.1.7.tgz#9114534f5e93b7ad88cf99e3e583fb95b35968e0"
 
 react-native@^0.47.2:
   version "0.47.2"

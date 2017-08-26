@@ -20,7 +20,7 @@
   "dependencies": {
     "react": "16.0.0-alpha.12",
     "react-native": "^0.47.2",
-    "react-native-scandit": "^1.1.5",
+    "react-native-scandit": "^1.1.7",
     "styled-components": "^2.1.2"
   },
   "devDependencies": {
