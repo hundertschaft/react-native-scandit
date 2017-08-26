@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Text } from 'react-native';
+import { AppRegistry, StyleSheet, View, Text, Alert } from 'react-native';
 
 import Scandit, { ScanditPicker, ScanditSDKVersion } from 'react-native-scandit';
 
@@ -20,6 +20,16 @@ Scandit.setAppKey(SCANDIT_KEY);
 // =============================================================================
 
 export default class Scanner extends Component {
+
+  onBarcode = (code) => {
+    this.scanner.pauseScanning();
+    Alert.alert("Detected Barcode",
+      code.data,
+      [{ text: 'CONTINUE', onPress: () => this.scanner.resumeScanning() }],
+      { cancelable: false }
+    );
+  };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -31,7 +41,7 @@ export default class Scanner extends Component {
             cameraFacingPreference: 'back',
             workingRange: 'short'
           }}
-          onCodeScan={(code) => { alert(code.data); }}
+          onCodeScan={this.onBarcode}
         />
         <Text>Using Scandit SDK {ScanditSDKVersion}</Text>
       </View>
