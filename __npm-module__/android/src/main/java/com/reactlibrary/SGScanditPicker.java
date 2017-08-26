@@ -55,6 +55,7 @@ public class SGScanditPicker extends SimpleViewManager<BarcodePicker> implements
     private static final int COMMAND_PAUSE_SCANNING = 3;
     private static final int COMMAND_SET_SETTINGS   = 4;
     private static final int COMMAND_GET_SETTINGS   = 5;
+    private static final int COMMAND_RESUME_SCANNING  = 6;
 
     public static final String COMMAND_DONE_EVENT_NAME = "COMMAND_DONE_EVENT_NAME";
 
@@ -64,7 +65,8 @@ public class SGScanditPicker extends SimpleViewManager<BarcodePicker> implements
             "startScanningInPausedState", COMMAND_START_SCANNING_IN_PAUSED_STATE,
             "pauseScanning", COMMAND_PAUSE_SCANNING,
             "setSettings"  , COMMAND_SET_SETTINGS,
-            "getSettings"  , COMMAND_GET_SETTINGS
+            "getSettings"  , COMMAND_GET_SETTINGS,
+            "resumeScanning"  , COMMAND_RESUME_SCANNING
     );
 
     private static final String DID_SCAN_EVENT_KEY_NAME = "SGScanditPickerDidScan";
@@ -189,6 +191,10 @@ public class SGScanditPicker extends SimpleViewManager<BarcodePicker> implements
             }
             case COMMAND_PAUSE_SCANNING: {
                 picker.pauseScanning();
+                return;
+            }
+            case COMMAND_RESUME_SCANNING: {
+                picker.resumeScanning();
                 return;
             }
             case COMMAND_SET_SETTINGS: {
