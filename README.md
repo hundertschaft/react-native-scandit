@@ -2,7 +2,7 @@
 
 # react-native-scandit
 
->We (Shoplink GmbH) are a premium scandit-partner and in the process of merging our internal react-native bridge into this repository for public access. This project was originally created [by @Boris-c](https://github.com/salathegroup/react-native-scandit) at the Digital Epidemiology Lab at EPFL, Switzerland (Salathe Group). 
+<img align="right" src="https://user-images.githubusercontent.com/2397125/29744144-387b48f0-8a9f-11e7-8aff-90f323acc319.gif"> We (Shoplink GmbH) are a premium scandit-partner and in the process of merging our internal react-native bridge into this repository for public access. This project was originally created [by @Boris-c](https://github.com/salathegroup/react-native-scandit) at the Digital Epidemiology Lab at EPFL, Switzerland (Salathe Group). 
 
 ## Run the iOS & Android Demo App
 
