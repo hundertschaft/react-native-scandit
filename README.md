@@ -118,13 +118,31 @@ dependencies {
 ## Usage
 ```javascript
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Text } from 'react-native';
+import { AppRegistry, StyleSheet, View, Text, Alert } from 'react-native';
 
 import Scandit, { ScanditPicker, ScanditSDKVersion } from 'react-native-scandit';
 
 Scandit.setAppKey('<YOUR SCANDIT APP KEY>');
 
 export default class MyFirstScanditApp extends Component {
+
+  constructor(props) {
+    super(props);
+    this.handleContinueButton = this.handleContinueButton.bind(this);
+    this.state = { showScanner: false }
+  }
+
+  // Pause on a detected barcode (camera video is shown, but not parsed for barcodes).
+  // Comparison: stop - startScanning() would freeze the camera image up on detection.
+  onBarcode = (code) => {
+    this.scanner.pauseScanning();
+    Alert.alert("Detected Barcode",
+      code.data,
+      [{ text: 'CONTINUE', onPress: () => this.scanner.resumeScanning() }],
+      { cancelable: false }
+    );
+  };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -133,11 +151,12 @@ export default class MyFirstScanditApp extends Component {
           style={{ flex: 1 }}
           settings={{
             enabledSymbologies: ['EAN13', 'EAN8', 'UPCE'],
-            cameraFacingPreference: 'back'
+            cameraFacingPreference: 'back',
+            workingRange: 'short'
           }}
-          onCodeScan={(code) => {alert(code.data);}}
+          onCodeScan={this.onBarcode}
         />
-      <Text>Using Scandit SDK {ScanditSDKVersion}</Text>
+        <Text>Using Scandit SDK {ScanditSDKVersion}</Text>
       </View>
     );
   }
