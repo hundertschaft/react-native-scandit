@@ -9,7 +9,7 @@
  - If you don't have an account, [register on Scandit](https://ssl.scandit.com/customers/new?p=test) for a 30 day trail.
  - Download the Scandit iOS and Android BarcodeScan SDK
  - Clone this Repository
- - Set your API Key inside of the `SCANDIT_KEY.js` file
+ - Set your API Key inside of the `CONFIG.js` file
  - run `yarn install` (or `npm install` if you only use npm)
  - **Android**
    - Copy the `ScanditSDK` folder (containing the .aar file in its root) into `android/app/src/vendor/`

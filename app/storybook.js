@@ -2,6 +2,7 @@
 
 import { AppRegistry } from 'react-native';
 import { getStorybookUI, configure } from '@storybook/react-native';
+import { storybookConfig } from "scandit/CONFIG.js";
 
 // import stories
 configure(() => {
@@ -10,6 +11,6 @@ configure(() => {
   require('./scene/welcome/story');
 }, module);
 
-const StorybookUI = getStorybookUI({ port: 7007, host: 'localhost' });
+const StorybookUI = getStorybookUI(storybookConfig);
 AppRegistry.registerComponent('scandit', () => StorybookUI);
 export default StorybookUI;

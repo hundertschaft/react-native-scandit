@@ -6,7 +6,7 @@ import Scandit, { ScanditPicker, ScanditSDKVersion } from 'react-native-scandit'
 // =============================================================================
 // Set your Scandit SDK App Key inside of SCANDIT_KEY.js
 // =============================================================================
-import SCANDIT_KEY from "scandit/SCANDIT_KEY.js";
+import SCANDIT_KEY from "scandit/CONFIG.js";
 
 /* CHECK FOR KEY */
 if (SCANDIT_KEY === "<YOUR SCANDIT APP KEY>") {
