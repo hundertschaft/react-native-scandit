@@ -1151,6 +1151,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = iOSlink.shop.tester;
 				PRODUCT_NAME = scandit;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1177,6 +1178,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = iOSlink.shop.tester;
 				PRODUCT_NAME = scandit;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

@@ -60,7 +60,7 @@ Note:
 #### iOS
 
 1. Download Scandit SDK for iOS (https://ssl.scandit.com/sdk, Scandit account required) and uncompress the archive.
-2. Copy the `ScanditSDK` folder to your `ios/` folder. Note: This project assumes your ios project is under `ios/` — if not, you need to change the relative Framework Header Search path in the SGScandit.xcodeproj manually.
+2. Copy the `ScanditSDK` folder to your `ios/` folder. Note: This project assumes your ios project is under `ios/` — if not, you need to change the `ScanditSDK_Location` user property under Build-Settings (way at the bottom) inside the SGScandit.xcodeproj manually.
 3. Continue with the [Scandit install documentation](http://docs.scandit.com/stable/ios/ios-integrate.html) (which is at the time as follows):
   - Drag the `ScanditBarcodeScanner.framework` from your `ios/ScanditSDK` folder (Finder) *inside xcode*, into your projects `Frameworks/` group. (If you don't have a Frameworks Group, create one via right click -> Create Group. Name it "Frameworks").
   - A Model Pops-Up asking how xcode should add this file. Check both "Copy Items when needed" & "Create Groups". Select your target (should be selected) & hit ok.
