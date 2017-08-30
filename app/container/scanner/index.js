@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Text, Alert } from 'react-native';
+import { Platform, AppRegistry, StyleSheet, View, Text, Alert } from 'react-native';
 
 import Scandit, { ScanditPicker, ScanditSDKVersion } from 'react-native-scandit';
 
 // =============================================================================
 // Set your Scandit SDK App Key inside of SCANDIT_KEY.js
 // =============================================================================
-import SCANDIT_KEY from "scandit/CONFIG.js";
+import { SCANDIT_KEY_IOS, SCANDIT_KEY_ANDROID } from "scandit/CONFIG.js";
 
 /* CHECK FOR KEY */
-if (SCANDIT_KEY === "<YOUR SCANDIT APP KEY>") {
-  console.warn("[MISSING KEY]: Set your Scandit App Key inside of SCANDIT_KEY.js before running this demo!")
+if (SCANDIT_KEY_IOS === "<YOUR SCANDIT APP KEY>" || SCANDIT_KEY_ANDROID === "<YOUR SCANDIT APP KEY>") {
+  console.warn("[MISSING KEY]: Set your Scandit App Key inside of CONFIG.js before running this demo!")
 }
 
-Scandit.setAppKey(SCANDIT_KEY);
+/* Set AppKey */
+(Platform.OS === "ios") ? Scandit.setAppKey(SCANDIT_KEY_IOS) : Scandit.setAppKey(SCANDIT_KEY_ANDROID);
 
 // =============================================================================
 // Scanner Component

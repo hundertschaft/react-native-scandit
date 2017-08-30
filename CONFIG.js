@@ -4,7 +4,9 @@
 
 const SCANDIT_KEY = "<YOUR SCANDIT APP KEY>";
 
-export default SCANDIT_KEY;
+export const SCANDIT_KEY_IOS = SCANDIT_KEY;
+export const SCANDIT_KEY_ANDROID = SCANDIT_KEY;
+
 
 // =============================================================================
 // For using Storybook on Device, set host to your local IP Address.
