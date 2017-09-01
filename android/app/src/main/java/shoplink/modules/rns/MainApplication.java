@@ -1,4 +1,4 @@
-package com.scandit;
+package shoplink.modules.rns;
 
 import android.app.Application;
 
