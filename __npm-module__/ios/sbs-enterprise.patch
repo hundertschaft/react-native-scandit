@@ -1,0 +1,13 @@
+--- SBSOverlayController.h	2017-08-24 16:52:16.000000000 +0200
++++ SBSOverlayController_modified.h	2017-08-30 13:39:08.000000000 +0200
+@@ -663,5 +663,10 @@
+  */
+ - (void)setMatrixScanHighlightingColor:(nonnull UIColor *)color forState:(SBSMatrixScanHighlightingState)state;
+ 
++/**
++ * Disable the Scandit-Logo. Restricted Enterprise Feature.
++ */
++- (void)drawLogo:(BOOL)draw;
++
+ @end
+ 

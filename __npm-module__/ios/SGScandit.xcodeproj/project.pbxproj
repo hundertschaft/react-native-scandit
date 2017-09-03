@@ -40,6 +40,7 @@
 		698EA2FB1ED334DD0075121D /* NSDictionary+ScanditHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ScanditHelpers.m"; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* SGScandit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGScandit.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* SGScandit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGScandit.m; sourceTree = "<group>"; };
+		F4CC1BCC1F56E02C000E854E /* sbs-enterprise.patch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "sbs-enterprise.patch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +66,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				F4CC1BCC1F56E02C000E854E /* sbs-enterprise.patch */,
 				698EA2FA1ED334DD0075121D /* NSDictionary+ScanditHelpers.h */,
 				698EA2FB1ED334DD0075121D /* NSDictionary+ScanditHelpers.m */,
 				698EA2F71ED334AC0075121D /* SBSScanSettings+Helpers.h */,
@@ -95,6 +97,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "SGScandit" */;
 			buildPhases = (
+				F4CC1BCB1F56DFDD000E854E /* ShellScript */,
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
 				58B511D91A9E6C8500147676 /* CopyFiles */,
@@ -139,6 +142,24 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F4CC1BCB1F56DFDD000E854E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/sbs-enterprise.patch",
+				"$(ScanditSDK_Location)/ScanditBarcodeScanner.framework/Headers/",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd $SRCROOT\ncd ${SCRIPT_INPUT_FILE_1}\n\nif grep \"drawLogo\" SBSOverlayController.h > /dev/null\nthen\n  echo \"[react-native-scandit]: Already patched ${SCRIPT_INPUT_FILE_1}/SBSOverlayController.h.\"\n  exit\nelse\n  echo \"[react-native-scandit]: Trying to add enterprise interface (requires special API Key).\"\n  patch --no-backup-if-mismatch --quiet SBSOverlayController.h < ${SCRIPT_INPUT_FILE_0}\n  echo \"[react-native-scandit]: Patch applied to ${SCRIPT_INPUT_FILE_1}/SBSOverlayController.h.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		58B511D71A9E6C8500147676 /* Sources */ = {
@@ -236,7 +257,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../ios/ScanditSDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/$(ScanditSDK_Location)",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -251,6 +275,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "SGScandit-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				ScanditSDK_Location = ../../../ios/ScanditSDK;
 			};
 			name = Debug;
 		};
@@ -258,7 +283,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../ios/ScanditSDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/$(ScanditSDK_Location)",
+					"$(inherited)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -272,6 +300,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SGScandit-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				ScanditSDK_Location = ../../../ios/ScanditSDK;
 			};
 			name = Release;
 		};
