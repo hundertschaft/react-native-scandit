@@ -8,29 +8,30 @@
 
  - If you don't have an account, [register on Scandit](https://ssl.scandit.com/customers/new?p=test) for a 30 day trail.
  - Download the Scandit iOS and Android BarcodeScan SDK
- - Clone this Repository
+ - Clone this Repository (the demo app is inside the `_demo_/` sub-folder)
+ - `cd _demo_`
  - Set your API Key inside of the `CONFIG.js` file
  - run `yarn install` (or `npm install` if you only use npm)
  - **Android**
-   - Copy the `ScanditSDK` folder (containing the .aar file in its root) into `android/app/src/vendor/`
+   - Copy the `ScanditSDK` folder (containing the .aar file in its root) into `_demo_/android/app/src/vendor/`
    - Start the App in the emulator or device via `react-native run-android` (emulator: you need to set a webcam as a camera in your emulator to test barcode scanning)
  - **iOS**
-   - Copy the `ScanditSDK` folder (containing the .framework file in its root) into `ios/`
+   - Copy the `ScanditSDK` folder (containing the .framework file in its root) into `_demo_/ios/`
    - Open the `scandit.xcodeproj` with xcode and set your developer account for the targets `scandit` & `scanditTests`
    - Connect your iOS device and run the build from xcode (simulator has no camera)
  - **Use Storybook**
-   - This demo implements [storybook for react native](https://github.com/storybooks/storybook/tree/master/app/react-native). You can run the storybook via `npm run storybook`. Don't forget to set your local IP of your computer inside of `storybook.js` for on device testing. Default: localhost.
+   - This demo implements [storybook for react native](https://github.com/storybooks/storybook/tree/master/app/react-native). You can run the storybook via `npm run storybook`. Don't forget to set your local IP of your computer inside of `_demo_/app/storybook.js` for on device testing. Default: localhost.
 
-## Installation
+## Option 1: Installation
 
 `$ react-native install react-native-scandit`
 
 Note:
 - Scandit's SDK is required. See below how to add it to the iOS and Android projects.
 - You need to allow access to the camera, both for iOS and Android. Barcode scanning can not be tested in the iOS Simulator.
-- The npm package is found in this repo under `__npm-module__/` to avoid sym linking solutions for development.
+- The npm package is found in thee root of this repository.
 
-## Manual Package installation for iOS and Android
+## Option 2: Manual Package installation for iOS and Android
 
 `$ yarn install react-native-scandit`
 
@@ -56,7 +57,7 @@ Note:
       compile project(':react-native-scandit')
   	```
 
-## Add Scandit SDK
+## Add the Scandit SDK to your Project
 #### iOS
 
 1. Download Scandit SDK for iOS (https://ssl.scandit.com/sdk, Scandit account required) and uncompress the archive.
