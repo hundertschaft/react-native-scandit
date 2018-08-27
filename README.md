@@ -1,3 +1,20 @@
+# Depreciated! Please use [Scandit-React-Native](https://www.npmjs.com/package/scandit-react-native)
+
+The functionality of this package has been replicated to the Repository
+ - GitHub: https://github.com/Scandit/barcodescanner-sdk-react-native
+ - NPM module: https://www.npmjs.com/package/scandit-react-native
+ - Documentation: https://docs.scandit.com/stable/react_native/react-native-integrate.html
+
+ ```bash
+yarn add scandit-react-native
+ ```
+
+Please make sure you transition to the official package, as this module will not receive any further updates. A warning has been added to the NPM listing.
+
+---
+---
+---
+
 [![NPM](https://nodei.co/npm/react-native-scandit.png?compact=true)](https://npmjs.org/package/react-native-scandit)
 
 # react-native-scandit
